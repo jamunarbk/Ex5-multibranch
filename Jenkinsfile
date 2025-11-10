@@ -1,31 +1,32 @@
 pipeline { 
 agent any 
 environment { 
-VERSION = "1.0-dev" 
+VERSION = "1.0-feature-login" 
 } 
 stages { 
 stage('Build') { 
 steps { 
-echo "Building application from DEV branch" } 
+echo "Building login feature" 
+} 
 } 
 stage('Test') { 
 steps { 
 script { 
 if (isUnix()) { 
-sh 'echo Testing code...' 
+sh 'echo Testing login feature...' 
 } else { 
-bat 'echo Testing code...' 
+bat 'echo Testing login feature...' 
 } 
 } 
 } 
 } 
 stage('Deploy') { 
-when { branch 'main' } // won't run for dev steps 
-{
-echo "Deploying to development server" 
+when { branch 'main' } // won't run for feature branch steps
+{ 
+echo "Deploying login test build" 
 echo "Current version is ${env.VERSION}" 
 } 
-} 
+}
 } 
 } 
 
