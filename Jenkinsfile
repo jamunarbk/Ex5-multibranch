@@ -1,13 +1,12 @@
 pipeline { 
 agent any 
 environment { 
-VERSION = "1.0" 
+VERSION = "1.0-dev" 
 } 
 stages { 
 stage('Build') { 
 steps { 
-echo "Building application from MAIN branch" 
-} 
+echo "Building application from DEV branch" } 
 } 
 stage('Test') { 
 steps { 
@@ -18,13 +17,15 @@ sh 'echo Testing code...'
 bat 'echo Testing code...' 
 } 
 } 
-}
+} 
 } 
 stage('Deploy') { 
-when { branch 'main' } // only main deploys steps 
-{ 
-echo "Deploying to production" 
-echo "Current version is ${env.VERSION}" } 
+when { branch 'main' } // won't run for dev steps 
+{
+echo "Deploying to development server" 
+echo "Current version is ${env.VERSION}" 
 } 
 } 
-}
+} 
+} 
+
